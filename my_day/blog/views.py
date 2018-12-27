@@ -1,12 +1,19 @@
+# encoding=utf8
 from django.shortcuts import render, redirect
 from my_day import settings
 import os
 from django.core.urlresolvers import reverse
 from datetime import  datetime
 from models import *
+from django.http import HttpResponse
+
+
+
+
 def index(request):
     uname = request.session.get('uname')
     context = {'uname': uname}
+    #return HttpResponse("你好")
     return render(request, 'index.html', context)
 
 
@@ -15,13 +22,18 @@ def login(request):
 
 
 def login_handle(request):
-    request.session['uname'] = request.POST['uname']
-    request.session['upwd'] = request.POST['upwd']
-    # return redirect(reverse('home:index'))
-    # return render(request, 'index.html',context)
-    uname = request.session.get('uname')
-    context = {'uname':uname}
-    return render(request, 'index.html', context)
+    try:
+        user_login = Usr.objects.get(uname=request.POST['uname'])
+        request.session['uname'] = user_login
+        request.session['upwd'] = request.POST['upwd']
+        # return redirect(reverse('home:index'))
+        # return render(request, 'index.html',context)
+        context = {'uname': request.session.get('uname')}
+        return render(request, 'index.html', context)
+    except:
+        # user_login = False
+        context = {'uname': None}
+        return render(request, 'index.html', context)
 
 
 def logout(request):
@@ -37,19 +49,29 @@ def register(request):
 
 
 def submit(request):
-    uname = request.POST['uname']
-    upwd = request.POST['upwd']
-    umsg = request.POST['umsg']
-    ugender = request.POST['ugender']
-    uprivate = request.POST['uprivate']
-    context = {'uname': uname, 'upwd': upwd,'umsg':umsg, 'ugender': ugender, 'uprivate': uprivate}
+    new_usr = Usr()
+    new_usr.uname = request.POST['uname']
+    new_usr.upassword = request.POST['upwd']
+    new_usr.umsg = request.POST['umsg']
+    new_usr.ugender = request.POST['ugender']
+    new_usr.uprivate = request.POST['uprivate']
+    new_usr.ulogo = 0
+    new_usr.ubackground = 0
+    new_usr.save()
+    context = {'uname': new_usr.uname, 'upwd': new_usr.upassword,
+               'umsg': new_usr.umsg, 'ugender': new_usr.ugender,
+               'uprivate': new_usr.uprivate}
     return render(request, 'submit.html', context)
 
 
 def usr_info(request):
-    uname = request.session['uname']
-    context = {'uname': uname}
+    user_login = Usr.objects.get(uname=request.session['uname'])
+    new_usr = user_login
+    context = {'uname': new_usr.uname, 'upwd': new_usr.upassword,
+               'umsg': new_usr.umsg, 'ugender': new_usr.ugender,
+               'uprivate': new_usr.uprivate}
     return render(request, 'usr_info.html', context)
+
 
 def contact(request):
     uname = request.session.get('uname')
@@ -62,11 +84,8 @@ def contact(request):
 
 def content(request):
     uname = request.session.get('uname')
-
-    try:
-        Msg = Message.objects.get(mowner=uname)
-    except:
-        pass
+    Msg = Message.objects.get(mowner=uname)
+    # Msg = Message()
     Msg.mowner = uname
     if Msg.mowner != uname:
         return render(request, 'index.html')

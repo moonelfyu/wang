@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
 {% extends 'base.html' %}
@@ -9,9 +9,25 @@
 {% block left %}
     <img src="{% static "1.png" %}" width="100" height="100" alt="My image"/>
     <h1><strong>{{ uname }}</strong></h1>
-    <div>{{ ugender }}</div>
-{% endblock %}
 
+    <p>密码：{{ upwd }}</p>
+    <p>联系方式：{{ umsg }}</p>
+    <p>性别：{{ ugender }}</p>
+    <p>隐私：{{ uprivate }}</p>
+    <p>注销</p>
+{% endblock %}
+  <form action="/login_handle/" method="post">
+
+    <!-- label标签定义表单控件的文字标注，input类型为text定义了
+    一个单行文本输入框  -->
+    <p>
+    <label>用户名：</label><input type="text" name="uname" /></p>
+    <p>
+    <label>密码：</label><input type="password" name="upwd" /></p>
+      <p>
+    <input type="submit" name="" value="登录"></p>
+
+    </form>
 {% block right %}
      <p> {{ about }}</p>
 

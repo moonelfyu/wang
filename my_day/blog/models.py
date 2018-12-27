@@ -5,10 +5,12 @@ class Usr(models.Model):
     uname = models.CharField(max_length=20)
     upassword = models.CharField(max_length=20)
     ustate = models.CharField(max_length=50)
-    ugender = models.BooleanField()
+    ugender = models.CharField(max_length=5)
     ulogo = models.IntegerField()
     ubackground = models.IntegerField()
     umsg = models.CharField(max_length=30)
+    uprivate = models.CharField(max_length=5)
+    uisDelete = models.BooleanField(default=False)
 
     def __str__(self):
         return "%s" % self.uname
@@ -22,6 +24,7 @@ class Message(models.Model):
     mlike = models.IntegerField(default=0)
     mshare = models.IntegerField(default=0)
     mowner = models.ForeignKey(Usr)
+    # misDelete = models.BooleanField()
 
     def __str__(self):
         return "%s" % self.mtitle
