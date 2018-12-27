@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    {% extends 'base.html' %}
+</head>
+<body>
+{% block left %}注册成功！{% endblock %}
+{% block right %}
+    用户名：{{ uname }}
+    <p>密码：{{ upwd }}</p>
+    <p>联系方式：{{ umsg }}</p>
+    <p>性别：{{ ugender }}</p>
+    <p>隐私：{{ uprivate }}</p>
+
+
+{% endblock %}
+</body>
+</html>

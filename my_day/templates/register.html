@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% extends 'base.html' %}
+</head>
+<body>
+{% block left %}
+
+{% endblock %}
+{% block right %}
+    <form action="submit" method="post">
+
+    <!-- label标签定义表单控件的文字标注，input类型为text定义了
+    一个单行文本输入框  -->
+    <p>
+    <label>用户名：</label><input type="text" name="uname" />
+    </p>
+
+    <!-- input类型为password定义了一个密码输入框  -->
+    <p>
+    <label>密码：</label><input type="password" name="upwd" />
+    </p>
+    <p>
+    <label>确认密码：</label><input type="password" name="upwd2" />
+    </p>
+        <p>
+    <label>联系方式：</label><input type="text" name="umsg" />
+    </p>
+    <!-- input类型为radio定义了单选框  -->
+    <p>
+    <label>性别：</label>
+    <input type="radio" name="ugender" value="男" /> 男
+    <input type="radio" name="ugender" value="女" /> 女
+    </p>
+
+    <!-- input类型为checkbox定义了单选框  -->
+    <p>
+    <label>隐私：</label>
+    <input type="radio" name="uprivate" value="可见" /> 可见
+    <input type="radio" name="uprivate" value="不可见" /> 不可见
+    </p>
+
+    <!-- input类型为file定义上传照片或文件等资源  -->
+    <p>
+    <label>头像：</label>
+    <input type="file" name="person_pic">
+    </p>
+
+    <!-- textarea定义多行文本输入  -->
+    <p>
+    <label>个人描述：</label>
+    <textarea name="about"></textarea>
+    </p>
+
+    <!-- input类型为submit定义提交按钮
+         还可以用图片控件代替submit按钮提交，一般会导致提交两次，不建议使用。如：
+         <input type="image" src="xxx.gif">
+    -->
+    <p>
+    <input type="submit"  value="提交">
+
+    <!-- input类型为reset定义重置按钮  -->
+    <input type="reset"  value="重置">
+    </p>
+
+    </form>
+
+{% endblock %}
+
+</body>
+</html>

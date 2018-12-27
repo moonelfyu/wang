@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% extends 'base.html' %}
+{% load static from staticfiles %}
+
+</head>
+<style type="text/css">
+
+    li{
+        color : #333;
+    }
+
+
+
+</style>
+<body>
+
+    {% block left %}
+
+        <img src="{% static "1.png" %}" width="100" height="100" alt="My image"/>
+            <h1><strong>王鹏飞</strong></h1>
+            <div>me.moonelf@qq.com</div>
+            <div>江苏无锡.China</div>
+            <h2>I'm awesome!&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</h2>
+
+    {% endblock %}
+
+
+    {% block right %}
+
+
+        <li>嵌入式软件工程师</li>
+        <li>电气工程师</li>
+        <li>二级建造师</li>
+        <li>Python学习者</li>
+    {% endblock %}
+
+</body>
+</html>

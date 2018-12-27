@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+{% extends 'base.html' %}
+
+</head>
+<body>
+
+{% block right %}
+  <form action="/login_handle/" method="post">
+
+    <!-- label标签定义表单控件的文字标注，input类型为text定义了
+    一个单行文本输入框  -->
+    <p>
+    <label>用户名：</label><input type="text" name="uname" /></p>
+    <p>
+    <label>密码：</label><input type="password" name="upwd" /></p>
+      <p>
+    <input type="submit" name="" value="登录"></p>
+
+    </form>
+{% endblock %}
+</body>
+</html>

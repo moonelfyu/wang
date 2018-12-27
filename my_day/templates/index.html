@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+<script type="text/javascript" src='/static/tiny_mce/tiny_mce.js'></script>
+    <script type="text/javascript">
+        tinyMCE.init({
+            'mode':'textareas',
+            'theme':'advanced',
+
+        });
+    </script>
+    {% extends 'base.html' %}
+</head>
+<body>
+    {% block top %}
+        用户名
+        {% if uname != None %}
+        {{ uname }}
+        {% endif %}
+    {% endblock %}
+    {% block bottten %}
+        <p>内容</p>
+        {% if uname != None %}
+            <form method="post" action="/content/" width = "100" height = "100">
+            <input type="text" name="mtitle">
+            <br>
+            <textarea name='mbody' >write your story here</textarea>
+            <br>
+            <input type="submit" value="提交">
+        {% endif %}
+</form>
+{% endblock %}
+</body>
+</html>
